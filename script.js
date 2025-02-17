@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     resizeBtn.addEventListener('click', async () => {
-        const files = fileInput.files;
+        const files = Array.from(fileInput.files);
         const targetSize = parseInt(sizeInput.value);
 
         if (files.length === 0 || isNaN(targetSize) || targetSize <= 0) {
@@ -72,10 +72,31 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayUploadedPhotos(files) {
         uploadedPhotos.innerHTML = '';
         for (let file of files) {
+            const photoContainer = document.createElement('div');
+            photoContainer.classList.add('photo-container');
+
             const img = document.createElement('img');
             img.src = URL.createObjectURL(file);
-            uploadedPhotos.appendChild(img);
+
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('remove-photo');
+            removeButton.textContent = '✕';
+            removeButton.addEventListener('click', () => {
+                photoContainer.remove();
+                updateFileInput(files, file);
+            });
+
+            photoContainer.appendChild(img);
+            photoContainer.appendChild(removeButton);
+            uploadedPhotos.appendChild(photoContainer);
         }
+    }
+
+    function updateFileInput(files, fileToRemove) {
+        const updatedFiles = files.filter(file => file !== fileToRemove);
+        const dataTransfer = new DataTransfer();
+        updatedFiles.forEach(file => dataTransfer.items.add(file));
+        fileInput.files = dataTransfer.files;
     }
 
     async function resizeImage(file, targetSizeKB) {
@@ -97,6 +118,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     while (resizedDataUrl.length / 1024 > targetSizeKB && quality > 0.1) {
                         quality -= 0.05;
                         resizedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                    }
+
+                    // If the image is still too large, reduce the resolution
+                    while (resizedDataUrl.length / 1024 > targetSizeKB && (canvas.width > 100 || canvas.height > 100)) {
+                        canvas.width *= 0.9;
+                        canvas.height *= 0.9;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        resizedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                    }
+
+                    // Handle case where image could not be compressed to the target size
+                    if (resizedDataUrl.length / 1024 > targetSizeKB) {
+                        alert('Could not compress the image to the desired size.');
+                        return reject(new Error('Could not compress the image to the desired size.'));
                     }
 
                     fetch(resizedDataUrl)

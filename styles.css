@@ -45,11 +45,41 @@ input[type="file"] {
     margin-bottom: 20px;
 }
 
-#uploaded-photos img {
+.photo-container {
+    position: relative;
     width: 100px;
     height: 100px;
+}
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 8px;
+}
+
+.photo-container .remove-photo {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 10%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.photo-container .remove-photo:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
 }
 
 #size-input {
