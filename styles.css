@@ -1,13 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f2f5;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0;
-    padding: 10px;
-    box-sizing: border-box;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .container {
@@ -65,7 +81,7 @@ input[type="file"] {
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
-    border-radius: 10%;
+    border-radius: 50%;
     width: 24px;
     height: 24px;
     display: flex;
@@ -151,4 +167,31 @@ button:hover:not(:disabled) {
 
 #download-all-btn:hover {
     background-color: #218838;
+}
+
+.footer {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    padding: 10px;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer .heart {
+    color: red;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+    padding: 0 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.footer a:hover {
+    background-color: #007bff;
+    color: #fff;
 }

@@ -8,23 +8,29 @@
     <script defer src="https://cdn.vercel-analytics.com/v1/script.debug.js"></script>
 </head>
 <body>
-<div class="container">
-    <h1>Photo Compressor</h1>
-    <div class="upload-box" id="upload-box">
-        <p>Drag & Drop your photos here or click to upload</p>
-        <input type="file" id="file-input" multiple accept="image/*">
-    </div>
-    <div id="uploaded-photos" class="uploaded-photos"></div>
-    <label for="size-input">Resize to (in KB): </label>
-    <input type="number" id="size-input" placeholder="Enter size in KB" min="1">
-    <button id="resize-btn">Resize Photos</button>
-    <div id="loader" class="loader hidden"></div>
-    <div id="output" class="output hidden">
-        <p>Files have been processed. You can download them below:</p>
-        <div id="download-links" class="download-links"></div>
-        <button id="download-all-btn" class="hidden">Download All</button>
+<div class="main-content">
+    <div class="container">
+        <h1 style="margin-bottom: 10px">Photo Compressor</h1>
+        <div class="upload-box" id="upload-box">
+            <p>Drag & Drop your photos here or click to upload</p>
+            <input type="file" id="file-input" multiple accept="image/*">
+        </div>
+        <div id="uploaded-photos" class="uploaded-photos"></div>
+        <label for="size-input">Resize to (in KB): </label>
+        <input type="number" id="size-input" placeholder="Enter size in KB" min="1">
+        <button id="resize-btn">Resize Photos</button>
+        <div id="loader" class="loader hidden"></div>
+        <div id="output" class="output hidden">
+            <p>Files have been processed. You can download them below:</p>
+            <div id="download-links" class="download-links"></div>
+            <button id="download-all-btn" class="hidden">Download All</button>
+        </div>
     </div>
 </div>
+<footer class="footer">
+    <p>Made with <span class="heart">❤️</span> by <a href="https://www.linkedin.com/in/sourabh-kumar-sahu-5776a1203?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B7wfjzAVeTymTTi1FFK%2Bqtw%3D%3D" target="_blank">Sourabh Sahu</a></p>
+    <p><a href="mailto:sourabhwork04@gmail.com">sourabhwork04@gmail.com</a></p>
+</footer>
 <script src="script.js"></script>
 </body>
 </html>
